@@ -1,6 +1,4 @@
-package if5.research.core.Flink;
-
-import java.time.Instant;
+package if5.research.core.flink;
 
 public class EventFormat {
     public Object obj; // to change to actual used type

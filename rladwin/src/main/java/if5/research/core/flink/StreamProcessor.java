@@ -1,29 +1,19 @@
-package if5.research.core.Flink;
+package if5.research.core.flink;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
-import org.apache.flink.streaming.api.functions.ProcessFunction;
 
 import java.time.Instant;
 import java.time.Duration;
-import java.util.ArrayList;
 
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.OpenContext;
-import org.apache.flink.api.common.state.ListState;
-import org.apache.flink.api.common.state.ListStateDescriptor;
-import org.apache.flink.configuration.Configuration;
-import org.apache.flink.core.fs.Path;
 import org.apache.flink.util.Collector;
 
-import org.apache.flink.connector.file.src.FileSource;
-import org.apache.flink.connector.file.src.reader.TextLineInputFormat;
-
 public class StreamProcessor {
-
+/*
     StreamExecutionEnvironment env;
     DataStream<Object> streamGraph; // to change to parsed obj
 
@@ -86,5 +76,5 @@ public class StreamProcessor {
     public void execute(String job_name) throws Exception {
         this.env.execute(job_name);
     }
-
+*/
 }
