@@ -1,86 +1,38 @@
 package if5.research.core.bucketing.model;
 
-import com.tdunning.math.stats.MergingDigest;
+import if5.research.core.bucketing.stats.Histogram;
+import if5.research.core.bucketing.stats.Quantiles;
 
 public class Bucket {
 
-    // Core Statistics
-    public double count;
+    public int n;
     public double sum;
-    public double variance;
-    public double min;
-    public double max;
+    public double sumSquares;
 
-    // Advanced Distribution Statistics
-    public MergingDigest tDigest;  // T-Digest for quantile estimation
+    public Histogram histogram;
+    public Quantiles quantiles;
 
-    private static final int TDIGEST_COMPRESSION = 100; // Compression factor for T-Digest (higher = more accuracy but more memory)
+    public double lossEMA;
 
-    // Constructor for a single value
-    public Bucket(double value) {
-        this.count = 1;
-        this.sum = value;
-        this.variance = 0;
-        this.min = value;
-        this.max = value;
+    public Bucket(double x, double loss) {
+        this.n = 1;
+        this.sum = x;
+        this.sumSquares = x * x;
 
-        // Initialize T-Digest and add the first value
-        this.tDigest = new MergingDigest(TDIGEST_COMPRESSION);
-        this.tDigest.add(value);
+        this.histogram = new Histogram(x);
+        this.quantiles = new Quantiles(x);
+
+        this.lossEMA = loss;
     }
 
-    // Constructor for all values
-    public Bucket(double count, double sum, double variance, double min, double max, MergingDigest tDigest) {
-        this.count = count;
-        this.sum = sum;
-        this.variance = variance;
-        this.min = min;
-        this.max = max;
-        this.tDigest = tDigest;
-    }
+    public void merge(Bucket other) {
+        this.n += other.n;
+        this.sum += other.sum;
+        this.sumSquares += other.sumSquares;
 
-    // Merge two buckets
-    public static Bucket merge(Bucket older, Bucket newer) {
-        double newCount = older.count + newer.count;
-        double newSum = older.sum + newer.sum;
-        double newMin = Math.min(older.min, newer.min);
-        double newMax = Math.max(older.max, newer.max);
+        this.histogram.merge(other.histogram);
+        this.quantiles.merge(other.quantiles);
 
-        // Robust variance calculation
-        double meanOlder = older.sum / older.count;
-        double meanNewer = newer.sum / newer.count;
-        double deltaMean = meanOlder - meanNewer;
-        double weightedVarianceSum = (older.count * older.variance) + (newer.count * newer.variance);
-        double meanDifferenceTerm = (older.count * newer.count * deltaMean * deltaMean) / newCount;
-        double newVariance = (weightedVarianceSum + meanDifferenceTerm) / newCount;
-
-        // Merge T-Digests (create new digest to avoid mutating references)
-        MergingDigest newDigest = new MergingDigest(TDIGEST_COMPRESSION);
-        newDigest.add(older.tDigest);
-        newDigest.add(newer.tDigest);
-
-        return new Bucket(newCount, newSum, newVariance, newMin, newMax, newDigest);
-    }
-
-    /**
-     * Get the median (50th percentile) of values in this bucket
-     */
-    public double getMedian() {
-        return tDigest.quantile(0.5);
-    }
-
-    /**
-     * Get a specific quantile (percentile) of values in this bucket
-     *
-     * @param quantile Value between 0.0 and 1.0 (e.g., 0.99 for 99th
-     * percentile)
-     */
-    public double getQuantile(double quantile) {
-        return tDigest.quantile(quantile);
-    }
-
-    @Override
-    public String toString() {
-        return "count: " + count + ", sum: " + sum + ", mean: " + (sum / count) + ", median: " + getMedian() + ", variance: " + variance + ", min: " + min + ", max: " + max;
+        this.lossEMA = 0.9 * this.lossEMA + 0.1 * other.lossEMA; // need to check mathematically if this is how we merge lossema
     }
 }
