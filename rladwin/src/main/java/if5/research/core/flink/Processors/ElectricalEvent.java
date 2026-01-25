@@ -1,6 +1,6 @@
 package if5.research.core.flink.Processors;
 
-public class ElectricalEvent {
+public class ElectricalEvent{
     public Double period;
     public Double new_price;
     public Double new_demand;
@@ -19,5 +19,9 @@ public class ElectricalEvent {
         this.vicdemand = Double.parseDouble(parts[4].trim());
         this.transfer = Double.parseDouble(parts[5].trim());
         this.classification = Integer.parseInt(parts[6].trim());
+    }
+
+    public String toString() {
+        return period + "," + new_price + "," + new_demand + "," + vicprice + "," + vicdemand + "," + transfer + "," + classification;
     }
 }

@@ -12,4 +12,8 @@ public class SynGradualEvent {
         this.syntheticGradualValue = Long.parseLong(parts[1].trim());
         this.type = parts[2].trim();
     }
+
+    public String toString() {
+        return timestamp + "," + syntheticGradualValue + "," + type;
+    }
 }

@@ -2,29 +2,28 @@ package if5.research.core.flink.Processors;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+import org.apache.flink.streaming.api.functions.ProcessFunction;
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.util.Collector;
 
-public class StreamProcessor {
+public class StreamProcessor<Event> {
     private StreamExecutionEnvironment env;
     QueryProcessor queryProcessor;
 
-    class QueryProcessor extends KeyedProcessFunction<Integer, ElectricalEvent, String>{
+    class QueryProcessor extends ProcessFunction<Event, String>{
         public QueryProcessor() {
             // Initialize query processor
         }
 
         @Override
-        public void processElement(ElectricalEvent event, Context ctx, Collector<String> out) {
-            // Process each ElectricalEvent and produce output
-            String result = "Processed Event: " + event.period + ", " + event.new_price + ", " + event.new_demand + ", " + event.vicprice + ", " + event.vicdemand + ", " + event.transfer + ", " + event.classification;
-            System.out.println(result);
+        public void processElement(Event event, Context ctx, Collector<String> out) {
+            // Process each Event and produce output
+            String result = "Processed event:" + event.toString();
             out.collect(result);
         }
     }
 
-    public StreamProcessor() {
+    public StreamProcessor(int port, EventMapper<Event> mapper) {
         this.env = StreamExecutionEnvironment.getExecutionEnvironment();
         this.env.setParallelism(1);
         this.env.setRuntimeMode(RuntimeExecutionMode.STREAMING);
@@ -33,8 +32,8 @@ public class StreamProcessor {
         DataStream<String> socketStream = this.env.socketTextStream("localhost", 9999);
         socketStream
         .filter(s->(s != "" && s != null))
-        .map(ElectricalEvent::new)
-        .keyBy(ElectricalEvent -> 1) // single key to process all events together
+        .map(mapper)
+        .returns(mapper.getEventClass()) // Vu que c'est générique vaut l'indiquer la classe de retour
         .process(this.queryProcessor)
         .print();
     }

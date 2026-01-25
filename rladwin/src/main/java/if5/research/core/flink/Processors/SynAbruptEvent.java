@@ -13,4 +13,8 @@ public class SynAbruptEvent {
         this.type = parts[2].trim();
     }
 
+    public String toString() {
+        return timestamp + "," + syntheticAbruptValue + "," + type;
+    }
+
 }
