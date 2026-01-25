@@ -1,9 +1,10 @@
 import socket
-import random
 import time
+import csv
 
 HOST = 'localhost'
 PORT = 9999
+CSV_FILE = './source/elec.csv' 
 
 def start_server():
     # Création du socket
@@ -18,26 +19,15 @@ def start_server():
 
     try:
         while True:
-            # 1. Recevoir des données de Flink
-            data = conn.recv(1024).decode('utf-8')
-            if not data:
-                break
-
-            # (On nettoie les sauts de ligne)
-            message = data.strip()
-            if not message:
-                continue
-
-            print(f"REÇU: {message}")
-
-            # 2. Simuler une décision d'IA (0 ou 1)
-            # Dans le vrai projet, c'est ici que le DeepQ travaillera
-            action = random.choice(["SPLIT", "MERGE", "WAIT"])
-
-            # 3. Répondre à Flink (Important: ajouter \n pour la fin de ligne)
-            response = f"{action}\n"
-            conn.sendall(response.encode('utf-8'))
-
+            with open (CSV_FILE, 'r') as file:
+                csv_reader = csv.reader(file)
+                header = next(csv_reader)  # Lire l'en-tête (si présent)
+                print(f"PYTHON: En-tête du fichier CSV: {header}")
+                for row in csv_reader:
+                    event = ','.join(row) + '\n'
+                    conn.sendall(event.encode('utf-8'))
+                    print(f"PYTHON: Envoyé: {event.strip()}")
+                    time.sleep(1)
     except Exception as e:
         print(f"Erreur: {e}")
     finally:
