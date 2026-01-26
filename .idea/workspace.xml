@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9afabd48-3812-40ca-afa1-f4c0c9ca4709" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/rladwin/src/main/resources/simplelogger.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/source/elec.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/resources/elec.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/source/synthetic_abrupt.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/resources/synthetic_abrupt.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/source/synthetic_gradual.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/resources/synthetic_gradual.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/BucketingTestProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/BucketingTestProcess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/MockEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/MockEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/RandomEventSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/RandomEventSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/Bucket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketList.java" beforeDir="false" />
+    <list default="true" id="9afabd48-3812-40ca-afa1-f4c0c9ca4709" name="Changes" comment="cleaned up">
       <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketRow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/StatisticalFeatures.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/WindowSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/WindowSummary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/ElectricalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/ElectricalEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/StreamProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/StreamProcessor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynAbruptEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynAbruptEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynGradualEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynGradualEvent.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +49,9 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -135,8 +119,25 @@
       <option name="presentableId" value="Default" />
       <updated>1769279259417</updated>
       <workItem from="1769279260726" duration="8302000" />
-      <workItem from="1769444135022" duration="2221000" />
+      <workItem from="1769444135022" duration="2349000" />
     </task>
+    <task id="LOCAL-00001" summary="cleaned up">
+      <option name="closed" value="true" />
+      <created>1769446383497</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1769446383497</updated>
+    </task>
+    <task id="LOCAL-00002" summary="cleaned up">
+      <option name="closed" value="true" />
+      <created>1769446472372</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769446472372</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,6 +153,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="cleaned up" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

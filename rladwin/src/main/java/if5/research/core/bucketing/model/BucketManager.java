@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import if5.research.core.bucketing.stats.WindowSummary;
-
 public class BucketManager {
 
     private static final int M = 5; // Max buckets per row
@@ -72,27 +70,6 @@ public class BucketManager {
         }
 
         return merged;
-    }
-
-
-    private void mergeInto(WindowSummary ws, Bucket b) {
-        int n0 = ws.n;
-        int n1 = (int) b.count;
-        int n = n0 + n1;
-
-        if (n == 0) return;
-
-        double mean = (ws.mean * n0 + b.sum) / n;
-
-        double var =
-                (n0 * ws.variance +
-                        b.count * b.variance +
-                        (n0 * b.count * Math.pow(ws.mean - b.sum / b.count, 2)) / n)
-                        / n;
-
-        ws.n = n;
-        ws.mean = mean;
-        ws.variance = var;
     }
 
     // Returns a string representation of the bucket manager
