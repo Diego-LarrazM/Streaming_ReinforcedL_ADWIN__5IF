@@ -1,23 +1,23 @@
 package if5.research.core.bucketing.mock;
 
-import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.api.common.RuntimeExecutionMode;
+import java.util.Random;
+import java.util.stream.Stream;
+
+import if5.research.core.bucketing.model.BucketManager;
 
 public class BucketingMockJob {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        BucketManager bm = new BucketManager();
+        Random rand = new Random();
 
-        StreamExecutionEnvironment env =
-                StreamExecutionEnvironment.getExecutionEnvironment();
+        System.out.println("Stream started...");
 
-        env.setParallelism(1);
-        env.setRuntimeMode(RuntimeExecutionMode.STREAMING);
+        Stream.generate(rand::nextGaussian)
+                .limit(11)
+                .forEach(bm::update);
 
-        env
-                .addSource(new RandomEventSource())
-                .process(new BucketingTestProcess())
-                .print();
-
-        env.execute("Bucketing Mock Test");
+        System.out.println(bm.toString());
+        System.out.println("Stream finished...");
     }
 }
