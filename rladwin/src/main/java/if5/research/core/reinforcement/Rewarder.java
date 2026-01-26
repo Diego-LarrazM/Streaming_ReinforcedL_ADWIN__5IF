@@ -7,6 +7,7 @@ public class Rewarder {
   private final double kl_max; 
   private final double loss_max;
   private final double loss_min;
+  private final double tau;
 
   private double baseline_loss;
   private double exploration_alpha;
@@ -21,6 +22,7 @@ public class Rewarder {
      * @param loss_max maximum normalized loss improvement
      * @param loss_min minimum normalized loss improvement
      * @param kl_max maximum KL divergence to avoid extreme split penalties
+     * @param tau time constant for exploration decay
   */
   public Rewarder(
     double latency_alpha, 
@@ -30,7 +32,8 @@ public class Rewarder {
     double initial_baseline_loss, 
     double kl_max, 
     double loss_max, 
-    double loss_min
+    double loss_min,
+    double tau
   ) {
     this.latency_alpha = latency_alpha;
     this.split_cost = split_cost;
@@ -40,6 +43,7 @@ public class Rewarder {
     this.loss_max = loss_max;
     this.loss_min = loss_min;
     this.kl_max = kl_max;
+    this.tau = tau;
   }
 
   /**
@@ -76,6 +80,7 @@ public class Rewarder {
 
     // Entropy bonus to encourage exploration
     double entropy_bonus = exploration_alpha * RLOps.entropy(actionProbs);
+    exploration_alpha *= Math.exp(-1 / tau); // decay exploration
 
     // Split penalty based on KL divergence between old and new DATA windows
     // Windows are modeled as Gaussians using mean/variance of the raw stream (or features)
