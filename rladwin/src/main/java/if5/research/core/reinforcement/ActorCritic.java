@@ -34,12 +34,12 @@ public class ActorCritic {
         return action;
     }
 
-    public void update(double previousReward, double[] newStateGeneralStats) {
+    public void update(double reward, double[] newStateGeneralStats) {
         if(lastEvaluationInfo != null){
             // Predict expected return from this state given onwards.
             double current_value = critic.evaluate(currentEvaluationInfo.criticState); // V_{t+1}
             // Compute advantage (TD error)
-            double advantage = critic.advantage(previousReward, lastEvaluationInfo.value, current_value); // δ_t
+            double advantage = critic.advantage(reward, lastEvaluationInfo.value, current_value); // δ_t
             // Update actor policy
             aPolicy.update(lastEvaluationInfo, advantage);
             // Update critic value function

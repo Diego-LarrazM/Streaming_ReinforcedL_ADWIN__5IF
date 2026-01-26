@@ -54,5 +54,15 @@ public class RLOps {
 
         return softmaxValues;
     }
+
+    public static double entropy(double[] probabilities) {
+        double entropy = 0.0;
+        for (double p : probabilities) {
+            if (p > 0) { // avoid log(0)
+                entropy -= p * Math.log(p);
+            }
+        }
+        return entropy;
+    }
     
 }
