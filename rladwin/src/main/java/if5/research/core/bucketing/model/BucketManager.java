@@ -9,13 +9,13 @@ public class BucketManager {
     private static final int M = 5; // Max buckets per row
     private final List<LinkedList<Bucket>> rows = new ArrayList<>();
 
+    // Adds a new value to the bucket manager
     public void update(double value) {
-        // TODO: Calculate actual loss based on your application logic
-        // For now, using 1.0 as default loss
-        Bucket bucket = new Bucket(value, 1.0);
+        Bucket bucket = new Bucket(value);
         insertBucket(bucket, 0);
     }
 
+    // Inserts a new bucket in the bucket rows
     private void insertBucket(Bucket bucket, int rowIndex) {
         while (rows.size() <= rowIndex) {
             rows.add(new LinkedList<>());
@@ -34,6 +34,7 @@ public class BucketManager {
         }
     }
 
+    // Returns a string representation of the bucket manager
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -42,7 +43,7 @@ public class BucketManager {
                 sb.append(bucket.toString());
                 sb.append("\n");
             }
-            sb.append("\n"); // Separate rows with newline
+            sb.append("\n");
         }
         return sb.toString();
     }

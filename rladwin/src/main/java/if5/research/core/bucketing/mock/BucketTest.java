@@ -3,7 +3,6 @@ package if5.research.core.bucketing.mock;
 import if5.research.core.bucketing.model.BucketManager;
 
 public class BucketTest {
-
     public static void main(String[] args) {
         BucketManager bm = new BucketManager();
 
