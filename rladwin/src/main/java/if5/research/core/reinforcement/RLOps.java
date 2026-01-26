@@ -64,5 +64,19 @@ public class RLOps {
         }
         return entropy;
     }
+
+    public static double gaussianKL(
+            double mean1, double var1,
+            double mean2, double var2
+    ) {
+
+        var1 = Math.max(var1, 1e-8);
+        var2 = Math.max(var2, 1e-8);
+
+        double logTerm = Math.log(Math.sqrt(var2) / Math.sqrt(var1));
+        double fracTerm = (var1 + Math.pow(mean1 - mean2, 2)) / (2.0 * var2);
+
+        return logTerm + fracTerm - 0.5;
+    }
     
 }
