@@ -1,3 +1,4 @@
+
 package if5.research.core.flink.Processors;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -19,6 +20,7 @@ public class StreamProcessor<Event> {
         public void processElement(Event event, Context ctx, Collector<String> out) {
             // Process each Event and produce output
             String result = "Processed event:" + event.toString();
+
             out.collect(result);
         }
     }

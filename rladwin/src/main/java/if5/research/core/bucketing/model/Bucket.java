@@ -4,6 +4,9 @@ import com.tdunning.math.stats.MergingDigest;
 
 public class Bucket {
 
+    public int start;
+    public int end;
+
     public double count;
     public double sum;
     public double sumOfSquares;

@@ -34,6 +34,8 @@ public class StatisticalFeatures {
         double predShift = newW.prediction - oldW.prediction;
 
         return new double[] {
+                1.0,
+
                 meanDiff,
                 Math.abs(meanDiff),
 
@@ -49,5 +51,11 @@ public class StatisticalFeatures {
                 lossTrend,
                 predShift
         };
+    }
+
+    public static double[] waitAction() {
+        double[] phi = new double[FEATURE_DIM];
+        phi[0] = 1.0;
+        return phi;
     }
 }
