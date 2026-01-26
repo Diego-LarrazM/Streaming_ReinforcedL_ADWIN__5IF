@@ -11,7 +11,7 @@ public class StreamProcessor<Event> {
     private StreamExecutionEnvironment env;
     QueryProcessor queryProcessor;
 
-    class QueryProcessor extends ProcessFunction<Event, String>{
+    class QueryProcessor extends ProcessFunction<Event, String> {
         public QueryProcessor() {
             // Initialize query processor
         }
@@ -33,11 +33,11 @@ public class StreamProcessor<Event> {
 
         DataStream<String> socketStream = this.env.socketTextStream("localhost", 9999);
         socketStream
-        .filter(s->(s != "" && s != null))
-        .map(mapper)
-        .returns(mapper.getEventClass()) // Vu que c'est générique vaut l'indiquer la classe de retour
-        .process(this.queryProcessor)
-        .print();
+                .filter(s -> (s != "" && s != null))
+                .map(mapper)
+                .returns(mapper.getEventClass()) // Vu que c'est générique vaut l'indiquer la classe de retour
+                .process(this.queryProcessor)
+                .print();
     }
 
     public void execute(String job_name) throws Exception {

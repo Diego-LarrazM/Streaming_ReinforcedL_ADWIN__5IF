@@ -1,6 +1,6 @@
 package if5.research.core.flink.Processors;
 
-public class ElectricalEvent{
+public class ElectricalEvent {
     public Double period;
     public Double new_price;
     public Double new_demand;
@@ -9,7 +9,7 @@ public class ElectricalEvent{
     public Double transfer;
     public int classification;
 
-    public ElectricalEvent(String s){
+    public ElectricalEvent(String s) {
         // CSV format: parse attributes from source
         String[] parts = s.split(",");
         this.period = Double.parseDouble(parts[0].trim());

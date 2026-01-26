@@ -5,7 +5,7 @@ public class SynAbruptEvent {
     public long syntheticAbruptValue;
     public String type;
 
-    public SynAbruptEvent(String s){
+    public SynAbruptEvent(String s) {
         // CSV format: parse attributes from source
         String[] parts = s.split(",");
         this.timestamp = Long.parseLong(parts[0].trim());

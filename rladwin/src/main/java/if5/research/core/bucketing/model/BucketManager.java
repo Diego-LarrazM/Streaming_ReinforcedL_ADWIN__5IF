@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import if5.research.core.bucketing.stats.StatisticalFeatures;
+import if5.research.core.bucketing.stats.WindowSummary;
 
 public class BucketManager {
 
@@ -15,11 +15,10 @@ public class BucketManager {
     private final List<Bucket> buckets = new ArrayList<>();
     private final List<Integer> arrivalToBucket = new ArrayList<>();
 
+    // Adds a new value to the bucket manager
     public void update(double value) {
         int arrivalIndex = arrivalToBucket.size();
-        // TODO: Calculate actual loss based on your application logic
-        // For now, using 1.0 as default loss
-        Bucket bucket = new Bucket(value, 1.0);
+        Bucket bucket = new Bucket(value);
 
         bucket.start = arrivalIndex;
         bucket.end = arrivalIndex;
@@ -31,6 +30,7 @@ public class BucketManager {
         insertBucket(bucket, 0);
     }
 
+    // Inserts a new bucket in the bucket rows
     private void insertBucket(Bucket bucket, int rowIndex) {
         while (rows.size() <= rowIndex) {
             rows.add(new LinkedList<>());
@@ -51,7 +51,7 @@ public class BucketManager {
 
         Bucket merged = Bucket.merge(older, newer);
         merged.start = older.start;
-        merged.end   = newer.end;
+        merged.end = newer.end;
 
         int idxOlder = buckets.indexOf(older);
         int idxNewer = buckets.indexOf(newer);
@@ -74,21 +74,6 @@ public class BucketManager {
         return merged;
     }
 
-    public WindowSummary summarizeRange(int from, int to) {
-
-        WindowSummary ws = new WindowSummary();
-        int lastBucket = -1;
-
-        for (int i = from; i <= to; i++) {
-            int bIdx = arrivalToBucket.get(i);
-
-            if (bIdx != lastBucket) {
-                mergeInto(ws, buckets.get(bIdx));
-                lastBucket = bIdx;
-            }
-        }
-        return ws;
-    }
 
     private void mergeInto(WindowSummary ws, Bucket b) {
         int n0 = ws.n;
@@ -108,33 +93,9 @@ public class BucketManager {
         ws.n = n;
         ws.mean = mean;
         ws.variance = var;
-
-        ws.quantiles.merge(b.tDigest);
-        ws.histogram.merge(b);
-        ws.lossEMA = Math.max(ws.lossEMA, b.lossEMA);
     }
 
-    public double[][] buildSplitFeatureBatch(List<Integer> candidateSplits) {
-
-        int K = candidateSplits.size();
-        double[][] features = new double[K + 1][StatisticalFeatures.FEATURE_DIM];
-
-        // Action 0 = WAIT
-        features[0] = StatisticalFeatures.waitAction();
-
-        for (int i = 0; i < K; i++) {
-            int split = candidateSplits.get(i);
-
-            WindowSummary oldW = summarizeRange(0, split);
-            WindowSummary newW = summarizeRange(split + 1, arrivalToBucket.size() - 1);
-
-
-            features[i + 1] = StatisticalFeatures.extract(oldW, newW);
-        }
-
-        return features;
-    }
-
+    // Returns a string representation of the bucket manager
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -143,33 +104,10 @@ public class BucketManager {
                 sb.append(bucket.toString());
                 sb.append("\n");
             }
-            sb.append("\n"); // Separate rows with newline
+            sb.append("\n");
         }
         return sb.toString();
     }
 
-    public void discardUpToArrival(int splitArrival) {
-
-        int bucketIdx = arrivalToBucket.get(splitArrival);
-        Bucket cutBucket = buckets.get(bucketIdx);
-        int cutArrival = cutBucket.end;
-
-        arrivalToBucket.subList(0, cutArrival + 1).clear();
-
-        buckets.subList(0, bucketIdx + 1).clear();
-
-        for (int i = 0; i < arrivalToBucket.size(); i++) {
-            arrivalToBucket.set(i, arrivalToBucket.get(i) - (bucketIdx + 1));
-        }
-
-        rebuildRows();
-    }
-
-    private void rebuildRows() {
-        rows.clear();
-        for (Bucket b : buckets) {
-            insertBucket(b, 0);
-        }
-    }
 
 }

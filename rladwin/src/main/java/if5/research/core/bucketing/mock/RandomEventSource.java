@@ -15,13 +15,11 @@ public class RandomEventSource implements SourceFunction<MockEvent> {
 
         while (running) {
             double value = rnd.nextGaussian();               // data
-            double prediction = value + rnd.nextGaussian()*0.1;
+            double prediction = value + rnd.nextGaussian() * 0.1;
             double loss = Math.abs(value - prediction);
 
             ctx.collect(new MockEvent(
                     value,
-                    loss,
-                    prediction,
                     t
             ));
 

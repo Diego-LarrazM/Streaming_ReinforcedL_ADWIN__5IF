@@ -4,14 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9afabd48-3812-40ca-afa1-f4c0c9ca4709" name="Changes" comment="" />
+    <list default="true" id="9afabd48-3812-40ca-afa1-f4c0c9ca4709" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/resources/simplelogger.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/source/elec.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/resources/elec.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/source/synthetic_abrupt.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/resources/synthetic_abrupt.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/source/synthetic_gradual.csv" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/resources/synthetic_gradual.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/BucketingTestProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/BucketingTestProcess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/MockEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/MockEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/RandomEventSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/RandomEventSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/Bucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketRow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/StatisticalFeatures.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/WindowSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/WindowSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/ElectricalEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/ElectricalEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/StreamProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/StreamProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynAbruptEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynAbruptEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynGradualEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynGradualEvent.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="11" />
+    <option name="cachedIndexableFilesCount" value="29" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -24,30 +45,33 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/Bucketing&amp;Stats" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "louiskusno"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;louiskusno&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Diego-LarrazM/Streaming_ReinforcedL_ADWIN__5IF.git",
-    "accountId": "78a78cda-38f5-4f26-b146-ac708c5939b8"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Diego-LarrazM/Streaming_ReinforcedL_ADWIN__5IF.git&quot;,
+    &quot;accountId&quot;: &quot;78a78cda-38f5-4f26-b146-ac708c5939b8&quot;
   }
-}]]></component>
+}</component>
+  <component name="MavenRunner">
+    <option name="jreName" value="ms-17" />
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="38iP8UR2IGyZEAsJOsHO2d9qQ4S" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -56,27 +80,45 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.BucketTest.executor": "Run",
+    "Application.BucketingMockJob.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "3f4f04bd",
+    "git-widget-placeholder": "feature/Bucketing&&Stats",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/louis/insa/streaming-reinforced-L-ADWIN/rladwin/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/louis/insa/streaming-reinforced-L-ADWIN/src/main/java/org/example/Main.java",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "ml.llm.LLMAIWorkflowsConfigurable",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\louis\insa\streaming-reinforced-L-ADWIN\rladwin\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\louis\insa\streaming-reinforced-L-ADWIN\rladwin\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="bucketTest" />
+    </option>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -93,10 +135,37 @@
       <option name="presentableId" value="Default" />
       <updated>1769279259417</updated>
       <workItem from="1769279260726" duration="8302000" />
+      <workItem from="1769444135022" duration="2221000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -5,7 +5,7 @@ public class SynGradualEvent {
     public long syntheticGradualValue;
     public String type;
 
-    public SynGradualEvent(String s){
+    public SynGradualEvent(String s) {
         // CSV format: parse attributes from source
         String[] parts = s.split(",");
         this.timestamp = Long.parseLong(parts[0].trim());
