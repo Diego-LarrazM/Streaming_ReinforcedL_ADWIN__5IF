@@ -28,7 +28,7 @@ public class ElecStreamProcessor {
             this.bucketManager = new BucketManager();
             this.actorCritic = new ActorCritic(
                     BucketManager.FEATURE_DIM,
-                    4,
+                    6,
                     0.001,
                     0.001,
                     0.99

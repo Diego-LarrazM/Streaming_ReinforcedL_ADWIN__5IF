@@ -1,5 +1,6 @@
 package if5.research.core.bucketing.model;
 
+import com.tdunning.math.stats.MergingDigest;
 import if5.research.core.bucketing.stats.WindowSummary;
 
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.List;
 public class BucketManager {
 
     private static final int M = 5; // Max buckets per row
-    public static final int FEATURE_DIM = 8;
+    public static final int FEATURE_DIM = 11;
 
     private final List<LinkedList<Bucket>> rows = new ArrayList<>();
 
@@ -72,16 +73,23 @@ public class BucketManager {
         return splits;
     }
 
-    private WindowSummary summarizeBuckets(List<Bucket> buckets,
-                                           int from, int to) {
+    private WindowSummary summarizeBuckets(List<Bucket> buckets, int from, int to) {
 
         WindowSummary w = new WindowSummary();
+
         double sum = 0;
         double varSum = 0;
         double count = 0;
 
+        MergingDigest digest = null;
+
         for (int i = from; i < to; i++) {
             Bucket b = buckets.get(i);
+
+            if (digest == null) {
+                digest = new MergingDigest(100);
+            }
+            digest.add(b.tDigest);
 
             if (count == 0) {
                 count = b.count;
@@ -90,7 +98,6 @@ public class BucketManager {
             } else {
                 double mean1 = sum / count;
                 double mean2 = b.sum / b.count;
-
                 double delta = mean1 - mean2;
 
                 varSum += b.variance * b.count
@@ -105,6 +112,7 @@ public class BucketManager {
         w.n = (int) count;
         w.mean = sum / count;
         w.variance = varSum / count;
+        w.digest = digest;
 
         return w;
     }
@@ -129,6 +137,15 @@ public class BucketManager {
             WindowSummary newW =
                     summarizeBuckets(ordered, split, ordered.size());
 
+            double oldQ50 = oldW.digest.quantile(0.5);
+            double newQ50 = newW.digest.quantile(0.5);
+
+            double oldQ10 = oldW.digest.quantile(0.1);
+            double oldQ90 = oldW.digest.quantile(0.9);
+
+            double newQ10 = newW.digest.quantile(0.1);
+            double newQ90 = newW.digest.quantile(0.9);
+
             double[] f = new double[FEATURE_DIM];
             double eps = 1e-9;
 
@@ -140,6 +157,9 @@ public class BucketManager {
             f[5] = Math.abs(newW.mean - oldW.mean);
             f[6] = newW.variance / (oldW.variance + eps);
             f[7] = newW.n / (double) (oldW.n + newW.n + eps);
+            f[8]  = Math.abs(newQ50 - oldQ50);
+            f[9]  = (newQ90 - newQ10);
+            f[10] = (newQ90 - newQ10) / (oldQ90 - oldQ10 + eps);
 
             features[i + 1] = f;
         }
@@ -169,7 +189,11 @@ public class BucketManager {
         double varSum = 0;
         double count = 0;
 
+        MergingDigest digest = new MergingDigest(100);
+
         for (Bucket b : buckets) {
+            digest.add(b.tDigest);
+
             if (count == 0) {
                 count = b.count;
                 sum = b.sum;
@@ -188,10 +212,21 @@ public class BucketManager {
             }
         }
 
-        double mean = sum / Math.max(count, 1e-9);
-        double variance = varSum / Math.max(count, 1e-9);
+        double mean = sum / count;
+        double variance = varSum / count;
 
-        return new double[] { 1.0, mean, variance, count };
+        double q10 = digest.quantile(0.1);
+        double q50 = digest.quantile(0.5);
+        double q90 = digest.quantile(0.9);
+
+        return new double[] {
+                1.0,
+                mean,
+                variance,
+                count,
+                q50,
+                q90 - q10
+        };
     }
 
     private double[] getWaitVector() {
