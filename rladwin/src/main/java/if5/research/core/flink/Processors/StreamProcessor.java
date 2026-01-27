@@ -7,41 +7,36 @@ import if5.research.core.reinforcement.Rewarder;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.ProcessFunction;
+import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.api.common.RuntimeExecutionMode;
+import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.util.Collector;
 
 public class StreamProcessor<Event> {
     private StreamExecutionEnvironment env;
     QueryProcessor queryProcessor;
 
-    class QueryProcessor extends ProcessFunction<Event, String> {
+    class QueryProcessor extends KeyedProcessFunction<Integer, Event, String> {
 
-        /*private final BucketManager bucketManager;
-        private final ActorCritic actorCritic;
-        private final Rewarder rewarder;
+        private BucketManager bucketManager;
+        private ActorCritic actorCritic;
+        private Rewarder rewarder;
 
-        private double[] lastGeneralStats = null;*/
+        private double[] lastGeneralStats = null;
 
-        public QueryProcessor() {
-            /*this.bucketManager = new BucketManager();
+        @Override
+        public void open(OpenContext openContext) throws Exception {
+            this.bucketManager = new BucketManager();
             this.actorCritic = new ActorCritic(
-                    BucketManager.FEATURE_DIM, // feature dim
-                    0.001,  // actor lr
-                    0.001,  // critic lr
-                    0.99    // gamma
+                    BucketManager.FEATURE_DIM,
+                    0.001,
+                    0.001,
+                    0.99
             );
             this.rewarder = new Rewarder(
-                    0.01,   // latency_alpha
-                    0.5,    // split_cost
-                    0.01,   // exploration_alpha
-                    0.01,   // trend_gamma
-                    1.0,    // initial_baseline_loss
-                    5.0,    // kl_max
-                    1.0,    // loss_max
-                    -1.0,   // loss_min
-                    1000.0  // tau
-            );*/
+                    0.01, 0.5, 0.01, 0.01,
+                    1.0, 5.0, 1.0, -1.0, 1000.0
+            );
         }
 
         @Override
@@ -100,6 +95,7 @@ public class StreamProcessor<Event> {
                 .filter(s -> (s != "" && s != null))
                 .map(mapper)
                 .returns(mapper.getEventClass()) // Vu que c'est générique vaut l'indiquer la classe de retour
+                .keyBy(t -> 0) // Tous les événements dans la même clé pour un seul processFunction
                 .process(this.queryProcessor)
                 .print();
     }
