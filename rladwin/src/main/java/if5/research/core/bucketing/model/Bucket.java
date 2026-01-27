@@ -73,7 +73,7 @@ public class Bucket {
      * Get a specific quantile (percentile) of values in this bucket
      *
      * @param quantile Value between 0.0 and 1.0 (e.g., 0.99 for 99th
-     * percentile)
+     *                 percentile)
      */
     public double getQuantile(double quantile) {
         return tDigest.quantile(quantile);

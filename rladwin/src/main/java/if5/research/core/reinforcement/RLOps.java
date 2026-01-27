@@ -1,0 +1,82 @@
+package if5.research.core.reinforcement;
+
+public class RLOps {
+
+    public static double sigmoid(double x) { // double x -> [0,1]
+        return 1.0 / (1.0 + Math.exp(-x));
+    }
+
+    public static double dot(double[] a, double[] b) {
+        double result = 0.0;
+        for (int i = 0; i < a.length; i++) {
+            result += a[i] * b[i];
+        }
+        return result;
+    }
+
+    public static double max(double[] array) {
+        double maxVal = Double.NEGATIVE_INFINITY;
+        for (double val : array) {
+            if (val > maxVal) {
+                maxVal = val;
+            }
+        }
+        return maxVal;
+    }
+
+    public static int argmax(double[] array){
+        int iMax = 0;
+        double maxVal = Double.NEGATIVE_INFINITY;
+        for (int i = 0; i < array.length; i++){
+            double val = array[i];
+            if(val > maxVal){
+                maxVal = val;
+                iMax = i;
+            }
+        }
+        return iMax;
+    }
+
+    public static double[] softmax(double[] logits) {
+        double maxLogit = max(logits); // to improve numerical stability, preventing overflow
+
+        double sumExp = 0.0;
+        double[] expValues = new double[logits.length];
+        for (int i = 0; i < logits.length; i++) {
+            expValues[i] = Math.exp(logits[i] - maxLogit);
+            sumExp += expValues[i];
+        }
+
+        double[] softmaxValues = new double[logits.length];
+        for (int i = 0; i < logits.length; i++) {
+            softmaxValues[i] = expValues[i] / sumExp;
+        }
+
+        return softmaxValues;
+    }
+
+    public static double entropy(double[] probabilities) {
+        double entropy = 0.0;
+        for (double p : probabilities) {
+            if (p > 0) { // avoid log(0)
+                entropy -= p * Math.log(p);
+            }
+        }
+        return entropy;
+    }
+
+    public static double gaussianKL(
+            double mean1, double var1,
+            double mean2, double var2
+    ) {
+
+        var1 = Math.max(var1, 1e-8);
+        var2 = Math.max(var2, 1e-8);
+
+        double logTerm = Math.log(Math.sqrt(var2) / Math.sqrt(var1));
+        double fracTerm = (var1 + Math.pow(mean1 - mean2, 2)) / (2.0 * var2);
+
+        return logTerm + fracTerm - 0.5;
+    }
+    
+}

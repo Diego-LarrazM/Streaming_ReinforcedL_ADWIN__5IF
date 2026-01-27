@@ -1,0 +1,7 @@
+if5\research\core\flink\Processors\StreamProcessor.class
+if5\research\core\flink\Processors\SynGradualEvent.class
+if5\research\core\flink\jobs\MainRL.class
+if5\research\core\flink\Processors\SynAbruptEvent.class
+if5\research\core\flink\operators\SocketRLMapper.class
+if5\research\core\flink\Processors\ElectricalEvent.class
+if5\research\Main.class

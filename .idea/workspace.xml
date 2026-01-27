@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9afabd48-3812-40ca-afa1-f4c0c9ca4709" name="Changes" comment="merged RL and flink part (need to be tested)">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/mock/BucketingMockJob.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/SplitStats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/utils/MathUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/ElectricalEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/EventMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/StreamProcessor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynAbruptEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/Processors/SynGradualEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/jobs/MainRL.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/operators/SocketRLMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/ActorCritic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/ActorPolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/Critic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/CriticInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/EvaluationInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/RLOps.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/reinforcement/Rewarder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/resources/elec.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/resources/simplelogger.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/resources/synthetic_abrupt.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/src/main/resources/synthetic_gradual.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/stream_source.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/target/maven-archiver/pom.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rladwin/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/socket_stream_gen.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/Bucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/model/BucketManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/WindowSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/bucketing/stats/WindowSummary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/EventFormat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rladwin/src/main/java/if5/research/core/flink/StreamProcessor.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="29" />
+    <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/Bucketing&amp;Stats" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="SOFT" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;louiskusno&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Diego-LarrazM/Streaming_ReinforcedL_ADWIN__5IF.git&quot;,
+    &quot;accountId&quot;: &quot;78a78cda-38f5-4f26-b146-ac708c5939b8&quot;
+  }
+}</component>
+  <component name="MavenRunner">
+    <option name="jreName" value="ms-17" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="38iP8UR2IGyZEAsJOsHO2d9qQ4S" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.BucketTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BucketingMockJob.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/Bucketing&amp;&amp;Stats&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/louis/insa/streaming-reinforced-L-ADWIN/rladwin/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/louis/insa/streaming-reinforced-L-ADWIN/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMAIWorkflowsConfigurable&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\louis\insa\streaming-reinforced-L-ADWIN\rladwin\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\louis\insa\streaming-reinforced-L-ADWIN\rladwin\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="bucketTest" />
+    </option>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9afabd48-3812-40ca-afa1-f4c0c9ca4709" name="Changes" comment="" />
+      <created>1769279259417</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769279259417</updated>
+      <workItem from="1769279260726" duration="8302000" />
+      <workItem from="1769444135022" duration="2349000" />
+    </task>
+    <task id="LOCAL-00001" summary="cleaned up">
+      <option name="closed" value="true" />
+      <created>1769446383497</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1769446383497</updated>
+    </task>
+    <task id="LOCAL-00002" summary="cleaned up">
+      <option name="closed" value="true" />
+      <created>1769446472372</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1769446472372</updated>
+    </task>
+    <task id="LOCAL-00003" summary="merged RL and flink part (need to be tested)">
+      <option name="closed" value="true" />
+      <created>1769500639307</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1769500639307</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="cleaned up" />
+    <MESSAGE value="merged RL and flink part (need to be tested)" />
+    <option name="LAST_COMMIT_MESSAGE" value="merged RL and flink part (need to be tested)" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
