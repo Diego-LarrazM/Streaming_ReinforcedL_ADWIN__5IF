@@ -2,6 +2,7 @@ package if5.research.core.bucketing.model;
 
 import if5.research.core.bucketing.stats.WindowSummary;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

@@ -4,7 +4,6 @@ package if5.research.core.flink.Processors;
 import if5.research.core.bucketing.model.BucketManager;
 import if5.research.core.reinforcement.ActorCritic;
 import if5.research.core.reinforcement.Rewarder;
-import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
@@ -12,11 +11,11 @@ import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.util.Collector;
 
-public class StreamProcessor<Event> {
+public class ElecStreamProcessor {
     private StreamExecutionEnvironment env;
     QueryProcessor queryProcessor;
 
-    class QueryProcessor extends KeyedProcessFunction<Integer, Event, String> {
+    static class QueryProcessor extends KeyedProcessFunction<Integer, ElectricalEvent, String> {
 
         private BucketManager bucketManager;
         private ActorCritic actorCritic;
@@ -29,6 +28,7 @@ public class StreamProcessor<Event> {
             this.bucketManager = new BucketManager();
             this.actorCritic = new ActorCritic(
                     BucketManager.FEATURE_DIM,
+                    4,
                     0.001,
                     0.001,
                     0.99
@@ -40,9 +40,8 @@ public class StreamProcessor<Event> {
         }
 
         @Override
-        public void processElement(Event event,Context ctx,Collector<String> out) {
-            /*
-            double x = extractValue(event);
+        public void processElement(ElectricalEvent event,Context ctx,Collector<String> out) {
+            double x = event.getValue();
 
             bucketManager.update(x);
 
@@ -50,7 +49,7 @@ public class StreamProcessor<Event> {
 
             double[] generalStats = bucketManager.getGeneralStats();
 
-            int action = actorCritic.decide(splitFeatures, generalStats);
+            /*int action = actorCritic.decide(splitFeatures, generalStats);
 
             bucketManager.applyAction(action);
 
@@ -79,12 +78,16 @@ public class StreamProcessor<Event> {
             lastGeneralStats = generalStats;
 
             out.collect("action=" + action + " reward=" + reward);*/
-            out.collect("testing");
+            
+            out.collect("BUCKET:\n" 
+                        + bucketManager.toString()
+                        + "STATS: " + splitFeatures.length
+                        + "\nGENERALSTATS: " + generalStats.length + "\n------------------");
         }
 
     }
 
-    public StreamProcessor(int port, EventMapper<Event> mapper) {
+    public ElecStreamProcessor(int port) {
         this.env = StreamExecutionEnvironment.getExecutionEnvironment();
         this.env.setParallelism(1);
         this.env.setRuntimeMode(RuntimeExecutionMode.STREAMING);
@@ -93,8 +96,7 @@ public class StreamProcessor<Event> {
         DataStream<String> socketStream = this.env.socketTextStream("localhost", 9999);
         socketStream
                 .filter(s -> (s != "" && s != null))
-                .map(mapper)
-                .returns(mapper.getEventClass()) // Vu que c'est générique vaut l'indiquer la classe de retour
+                .map(ElectricalEvent::new)
                 .keyBy(t -> 0) // Tous les événements dans la même clé pour un seul processFunction
                 .process(this.queryProcessor)
                 .print();
@@ -102,25 +104,6 @@ public class StreamProcessor<Event> {
 
     public void execute(String job_name) throws Exception {
         this.env.execute(job_name);
-    }
-
-    private double extractValue(Object event) {
-
-        if (event instanceof SynGradualEvent) {
-            return ((SynGradualEvent) event).syntheticGradualValue;
-        }
-
-        if (event instanceof SynAbruptEvent) {
-            return ((SynAbruptEvent) event).syntheticAbruptValue;
-        }
-
-        if (event instanceof ElectricalEvent) {
-            return ((ElectricalEvent) event).new_price;
-        }
-
-        throw new IllegalArgumentException(
-                "Unsupported event type: " + event.getClass()
-        );
     }
 
 }

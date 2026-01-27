@@ -1,5 +1,7 @@
 package if5.research.core.flink.Processors;
 
+import java.io.Serializable;
+
 public class SynAbruptEvent {
     public long timestamp;
     public long syntheticAbruptValue;

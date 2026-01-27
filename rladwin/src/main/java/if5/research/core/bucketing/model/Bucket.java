@@ -1,5 +1,7 @@
 package if5.research.core.bucketing.model;
 
+import java.io.Serializable;
+
 import com.tdunning.math.stats.MergingDigest;
 
 public class Bucket {

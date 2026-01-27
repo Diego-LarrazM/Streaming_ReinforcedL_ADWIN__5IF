@@ -1,5 +1,7 @@
 package if5.research.core.reinforcement;
 
+import java.io.Serializable;
+
 public class Critic {
     private double[] W; // Value function weights
     private double lr;

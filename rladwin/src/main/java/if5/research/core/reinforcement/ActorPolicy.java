@@ -1,5 +1,7 @@
 package if5.research.core.reinforcement;
 
+import java.io.Serializable;
+
 public class ActorPolicy {
     private double[] W; // Policy weights
     private double lr;

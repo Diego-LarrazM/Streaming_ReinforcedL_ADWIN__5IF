@@ -1,6 +1,8 @@
 package if5.research.core.reinforcement;
 
-public class Rewarder {
+import java.io.Serializable;
+
+public class Rewarder{
   private final double latency_alpha;
   private final double split_cost;
   private final double trend_gamma;

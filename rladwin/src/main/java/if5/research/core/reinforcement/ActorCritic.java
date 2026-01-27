@@ -1,5 +1,7 @@
 package if5.research.core.reinforcement;
 
+import java.io.Serializable;
+
 public class ActorCritic {
     private ActorPolicy aPolicy;
     private Critic critic;
@@ -7,9 +9,9 @@ public class ActorCritic {
     private EvaluationInfo currentEvaluationInfo = null;
     private double[] lastActionProbs;
 
-    public ActorCritic(int featureDimension, double alr, double clr, double discountGamma) {
-        this.aPolicy = new ActorPolicy(featureDimension, alr);
-        this.critic = new Critic(featureDimension, clr, discountGamma);
+    public ActorCritic(int actorFeatureDimension, int criticFeatureDimension, double alr, double clr, double discountGamma) {
+        this.aPolicy = new ActorPolicy(actorFeatureDimension, alr);
+        this.critic = new Critic(criticFeatureDimension, clr, discountGamma);
     }
 
     public int sample(double[] distribution){

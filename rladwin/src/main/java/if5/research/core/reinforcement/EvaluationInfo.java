@@ -1,5 +1,7 @@
 package if5.research.core.reinforcement;
 
+import java.io.Serializable;
+
 public class EvaluationInfo {
     public double[][] actionState; // split features vector
     public double[] criticState; // general stats
