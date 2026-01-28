@@ -1,6 +1,7 @@
 package if5.research.core.flink.Processors;
 
 public class SynAbruptEvent {
+
     public long timestamp;
     public long syntheticAbruptValue;
     public String type;
