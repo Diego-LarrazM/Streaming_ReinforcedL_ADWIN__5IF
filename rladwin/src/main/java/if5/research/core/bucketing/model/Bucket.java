@@ -83,6 +83,7 @@ public class Bucket {
 
     @Override
     public String toString() {
-        return "count: " + count + ", sum: " + sum + ", mean: " + (sum / count) + ", median: " + getMedian() + ", variance: " + variance + ", min: " + min + ", max: " + max;
+        return "count: " + count + ", sum: " + sum + ", mean: " + (sum / count) + ", median: " + getMedian() + ", variance: " + variance +
+                ", quantile-tdigest: "+tDigest.quantile(0.5)+", min: " + min + ", max: " + max;
     }
 }

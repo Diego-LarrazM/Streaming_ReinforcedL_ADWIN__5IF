@@ -49,7 +49,7 @@ public class ElecStreamProcessor {
 
             double[] generalStats = bucketManager.getGeneralStats();
 
-            /*int action = actorCritic.decide(splitFeatures, generalStats);
+            int action = actorCritic.decide(splitFeatures, generalStats);
 
             bucketManager.applyAction(action);
 
@@ -77,9 +77,9 @@ public class ElecStreamProcessor {
 
             lastGeneralStats = generalStats;
 
-            out.collect("action=" + action + " reward=" + reward);*/
+            out.collect("action=" + action + " reward=" + reward);
             
-            out.collect("BUCKET:\n" 
+            out.collect("BUCKET:\n"
                         + bucketManager.toString()
                         + "STATS: " + splitFeatures.length
                         + "\nGENERALSTATS: " + generalStats.length + "\n------------------");

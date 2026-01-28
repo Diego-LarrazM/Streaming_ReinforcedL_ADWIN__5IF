@@ -56,19 +56,24 @@ public class BucketManager {
     public List<Bucket> getBucketsOldestToNewest() {
         List<Bucket> ordered = new ArrayList<>();
         for (int r = rows.size() - 1; r >= 0; r--) {
-            ordered.addAll(rows.get(r));
+            LinkedList<Bucket> row = rows.get(r);
+            for (Bucket b : row) {
+                ordered.add(b);
+            }
         }
         return ordered;
     }
 
     public List<Integer> getCandidateSplits(int minBucketsPerSide) {
-        List<Bucket> ordered = getBucketsOldestToNewest();
         List<Integer> splits = new ArrayList<>();
-
+        int total = 0;
+        for (LinkedList<Bucket> row : rows) {
+            total += row.size();
+        }
         for (int i = minBucketsPerSide;
-             i <= ordered.size() - minBucketsPerSide;
+             i <= total - minBucketsPerSide;
              i++) {
-            splits.add(i); // split BEFORE bucket i
+            splits.add(i); // global time index
         }
         return splits;
     }
@@ -244,15 +249,28 @@ public class BucketManager {
 
         int splitIndex = action - 1;
 
-        List<Bucket> ordered = getBucketsOldestToNewest();
+        int seen = 0;
 
-        List<Bucket> newBuckets =
-                ordered.subList(splitIndex, ordered.size());
+        for (int r = rows.size() - 1; r >= 0; r--) {
+            LinkedList<Bucket> row = rows.get(r);
 
-        rows.clear();
-
-        for (Bucket b : newBuckets) {
-            insert(b, 0);
+            if (seen + row.size() <= splitIndex) {
+                // This entire row is older so we drop it
+                seen += row.size();
+                row.clear();
+            } else {
+                // Split happens inside this row
+                int localIndex = splitIndex - seen;
+                // Remove buckets strictly older than split
+                for (int i = 0; i < localIndex; i++) {
+                    row.removeFirst();
+                }
+                // All higher older rows must be cleared
+                for (int rr = r + 1; rr < rows.size(); rr++) {
+                    rows.get(rr).clear();
+                }
+                break;
+            }
         }
     }
 
