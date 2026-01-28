@@ -1,9 +1,5 @@
 package if5.research;
-
-import if5.research.core.flink.Processors.ElectricalEvent;
-import if5.research.core.flink.Processors.EventMapper;
 import if5.research.core.flink.Processors.ElecStreamProcessor;
-import if5.research.core.flink.Processors.SynAbruptEvent;
 
 public class Main {
     public static void main(String[] args) {
