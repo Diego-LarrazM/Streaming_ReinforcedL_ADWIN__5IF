@@ -34,7 +34,7 @@ public class ElecStreamProcessor {
                     0.99
             );
             this.rewarder = new Rewarder(
-                    0.01, 0.5, 0.01, 0.01,
+                    0.1, 0.1, 0.04, 0.01,
                     1.0, 5.0, 1.0, -1.0, 1000.0
             );
         }
