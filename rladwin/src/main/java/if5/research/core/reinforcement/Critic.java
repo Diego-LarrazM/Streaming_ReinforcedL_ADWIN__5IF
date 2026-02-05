@@ -22,10 +22,10 @@ public class Critic {
 
     public double evaluate(double[] state){ // Linear model
         return RLOps.dot(this.W, state); 
-    }  
+    }
 
     public double advantage(double prevReward, double prevVal, double currentVal){
-        return prevReward + discountGamma * currentVal - prevReward;
+        return prevReward + discountGamma * currentVal - prevVal;
     }
 
     public void update(double advantage, double[] prevState) {

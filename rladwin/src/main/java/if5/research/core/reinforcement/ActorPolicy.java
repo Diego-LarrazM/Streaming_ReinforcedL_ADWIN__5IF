@@ -11,6 +11,10 @@ public class ActorPolicy {
         this.lr = learningRate;
     }
 
+    public double[] getW() {
+        return W;
+    }
+
     public void init() {
         // Initialize policy weights to zero to start with 50/50 chance for each action
         for (int i = 0; i < W.length; i++) {
@@ -46,6 +50,7 @@ public class ActorPolicy {
                 wsum_i += lastActionInfo.probabilities[i] * state[i][j]; // p(i | s) · φ_i[j]
             }
             W[j] += lr * advantage * (phi_a[j] - wsum_i);
+            System.out.println("A: " + advantage + " | lr: " + lr + " | wsum_i: " + wsum_i+" | PHI: "+phi_a[j]);
         }
     }
 }

@@ -15,6 +15,8 @@ import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.util.Collector;
 
+import java.util.Arrays;
+
 public class ElecStreamProcessor {
     private StreamExecutionEnvironment env;
     QueryProcessor queryProcessor;
@@ -36,13 +38,13 @@ public class ElecStreamProcessor {
             this.actorCritic = new ActorCritic(
                     BucketManager.FEATURE_DIM,
                     6,
-                    0.001,
-                    0.001,
+                    0.0001,
+                    0.0001,
                     0.99
             );
             this.rewarder = new Rewarder(
-                    0.1, 0.2, 0.1, 0.01,
-                    1.0, 5.0, 1.0, -1.0, 6000.0
+                    10, 20, 10, 1,
+                    1.0, 5.0, 10.0, -10.0, 6000.0
             );
             this.events = new ModelEventStream();
         }
@@ -57,6 +59,7 @@ public class ElecStreamProcessor {
 
 
             double[][] splitFeatures = bucketManager.buildSplitFeatureBatch(2);
+            System.out.println("split_features: "+ Arrays.deepToString(splitFeatures));
 
             double[] generalStats = bucketManager.getGeneralStats();
 

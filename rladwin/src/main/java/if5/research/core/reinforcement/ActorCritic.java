@@ -1,6 +1,7 @@
 package if5.research.core.reinforcement;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class ActorCritic {
     private ActorPolicy aPolicy;
@@ -51,6 +52,7 @@ public class ActorCritic {
         }
         // update old info
         lastEvaluationInfo = currentEvaluationInfo;
+        System.out.println(Arrays.toString(aPolicy.getW()));
     }
     public double[] getLastActionProbs() {
         return lastActionProbs;
