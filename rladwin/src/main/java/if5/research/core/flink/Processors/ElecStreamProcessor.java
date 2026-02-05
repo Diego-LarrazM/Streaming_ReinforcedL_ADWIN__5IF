@@ -3,10 +3,14 @@ package if5.research.core.flink.Processors;
 
 import if5.research.core.bucketing.model.BucketManager;
 import if5.research.core.reinforcement.ActorCritic;
+import if5.research.core.reinforcement.GaussianNaiveBayes;
 import if5.research.core.reinforcement.Rewarder;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
+
+
+
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.functions.OpenContext;
 import org.apache.flink.util.Collector;
@@ -20,6 +24,9 @@ public class ElecStreamProcessor {
         private BucketManager bucketManager;
         private ActorCritic actorCritic;
         private Rewarder rewarder;
+        private ModelEventStream events;
+
+
 
         private double[] lastGeneralStats = null;
 
@@ -34,26 +41,37 @@ public class ElecStreamProcessor {
                     0.99
             );
             this.rewarder = new Rewarder(
-                    0.1, 0.1, 0.04, 0.01,
-                    1.0, 5.0, 1.0, -1.0, 1000.0
+                    0.1, 0.2, 0.1, 0.01,
+                    1.0, 5.0, 1.0, -1.0, 6000.0
             );
+            this.events = new ModelEventStream();
         }
 
         @Override
         public void processElement(ElectricalEvent event,Context ctx,Collector<String> out) {
+            
             double x = event.getValue();
-
+        
+            events.add(event);
             bucketManager.update(x);
+
 
             double[][] splitFeatures = bucketManager.buildSplitFeatureBatch(2);
 
             double[] generalStats = bucketManager.getGeneralStats();
 
+            GaussianNaiveBayes gnb_before = new GaussianNaiveBayes();
+            gnb_before.train(events.getEvents());
+            double loss_before = gnb_before.calculateLoss(events.getEvents());
+
             int action = actorCritic.decide(splitFeatures, generalStats);
 
             bucketManager.applyAction(action);
+            events.conserve_first(bucketManager.getWindowSize());
 
             double reward = 0.0;
+            GaussianNaiveBayes gnb = new GaussianNaiveBayes();
+            double loss_after=0.0;
 
             if (lastGeneralStats != null) {
                 int window_size = (int) generalStats[3];
@@ -65,8 +83,9 @@ public class ElecStreamProcessor {
                 double meanNew = generalStats[1];
                 double varNew  = generalStats[2];
 
-                double loss_before = varOld;
-                double loss_after  = varNew;
+                gnb.train(events.getEvents());
+
+                loss_after  = gnb.calculateLoss(events.getEvents());
 
                 double[] actionProbs = actorCritic.getLastActionProbs();
 

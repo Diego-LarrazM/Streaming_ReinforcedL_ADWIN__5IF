@@ -73,9 +73,9 @@ public class Rewarder{
     double[] actionProbs
   ) {
     // Reward based on prediction accuracy improvement
-    //baseline_loss = (1 - trend_gamma) * baseline_loss + trend_gamma * loss_before; // Update running baseline
-    //double loss_delta_norm = (loss_before - loss_after) / baseline_loss;
-    //loss_delta_norm = Math.max(Math.min(loss_delta_norm, loss_max), loss_min); // clip
+    baseline_loss = (1 - trend_gamma) * baseline_loss + trend_gamma * loss_before; // Update running baseline
+    double loss_delta_norm = (loss_before - loss_after) / baseline_loss;
+    loss_delta_norm = Math.max(Math.min(loss_delta_norm, loss_max), loss_min); // clip
 
     // Reward based on latency (window size)
     double latency_r = latency_alpha / window_size;
@@ -93,8 +93,8 @@ public class Rewarder{
         kl = Math.min(kl, kl_max); // max KL divergence to avoid extreme split penalties
         split_penalty = split_cost / (1.0 + kl);
     }
-
-    return latency_r - split_penalty + entropy_bonus; //loss_delta_norm + 
+    System.out.println("latency: "+ latency_r + ", split_penalty: "+split_penalty +", entropy_bonus :" + entropy_bonus+", l: "+loss_delta_norm );
+    return latency_r - split_penalty + entropy_bonus + loss_delta_norm ;
   }
 }
 

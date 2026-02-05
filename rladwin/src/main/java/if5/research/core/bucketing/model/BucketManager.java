@@ -18,12 +18,24 @@ public class BucketManager {
     private final List<Bucket> buckets = new ArrayList<>();
     private final List<Integer> arrivalToBucket = new ArrayList<>();
 
+    public int getWindowSize(){ 
+        int count = 0;
+         for (int r = rows.size() - 1; r >= 0; r--) {
+            LinkedList<Bucket> row = rows.get(r);
+            for (Bucket b : row) {
+                count++;
+            }
+        }
+        return count ;
+    }
+    
     // Adds a new value to the bucket manager
     public void update(double value) {
         int arrivalIndex = arrivalToBucket.size();
         Bucket bucket = new Bucket(value);
         insert(bucket, 0);
     }
+
 
     private void insert(Bucket bucket, int rowIndex) {
 
